@@ -2,7 +2,6 @@
 
 | Nome do arquivo | Teste | Resultado |
 | --------------- | ----- | --------- |
-| Arq1            | Digest do arquivo igual ao digest na lista | OK |
 | Arq1 | Digest do arquivo igual ao digest na lista | OK |  
 | Arq2 | Digest do arquivo diferente do digest na lista | NOT_OK |  
 | Arq3 | Arq3 e Arq4 são idênticos, mesmo digest na lista e nos arquivos | COLLISION |  

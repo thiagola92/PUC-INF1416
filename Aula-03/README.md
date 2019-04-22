@@ -24,7 +24,9 @@
 * Chave secreta
   * **Chave** utilizada para **cifrar** e **decifrar**
   * O algoritmo de cifragem não é necessariamente o mesmo que o de decifrar, embora a chave seja a mesma em ambos
+  * O texto cifrado é quase o mesmo tamanho do texto plano.  
 
+\*Essa imagens não estão corretas pois o texto cifrado está bem maior que o texto plano (erro meu... sorry)   
 ![Cipher example](cipher.jpg)  
 ![Decipher example](decipher.jpg)  
 
@@ -42,6 +44,29 @@
   * Ex: PKCS5
 
 ![Cifragem de bloco](bloocoscifragem.jpg)  
+
+* XOR 
+  * Método simples de cifragem
+  * Cifrar: executar um XOR da chave secreta com texto plano
+  * Decifrar: executar um XOR da chave secreta com texto cifrado
+
+|            |  0  |  1  |
+| ---------- | --- | --- |
+|  <b>0</b>  |  0  |  1  |
+|  <b>1</b>  |  1  |  0  |
+
+Cifrando  
+Texto plano: 0101-0111  
+Chave secreta: 1111-0011  
+\---------------------------------  
+Texto cifrado: 1010-0100  
+
+Decifrando  
+Texto cifrado: 1010-0100  
+Chave secreta: 1111-0011  
+\---------------------------------  
+Texto plano: 0101-0111  
+
 
 * Cifragem de fluxo
   * //TODO

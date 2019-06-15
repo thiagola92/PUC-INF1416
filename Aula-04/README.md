@@ -12,7 +12,7 @@
 * O algoritmo de cifragem não é necessariamente o mesmo que o de decifrar
 * Criptografia Assimétrica é custoso
   * O texto cifrado acaba bem maior que o texto plano
-  * O tempo de cifragem é maior que o da criptografia simétrica    
+  * O tempo de cifragem é maior que o da criptografia simétrica
 
 #### Cipher with private key
 ![Cipher with private key](privatekeycipher.jpg)  
@@ -70,10 +70,59 @@ Se o man-in-the-middle fizer o mesmo durante a primeira conexão de B com A, ele
 # Envelope Digital
 Em inglês: Digital Envelope
 
+O algoritmo assimétrico é bem custoso. Uma soluação para isso utilizar o algoritmo simétrico para criptograr a informação e o assimétrico para passar a chave do algoritmo simétrico.  
+
 ![Creating Digital Envelope](envelopedigital1.jpg)  
 ![Opening Digital Envelope](envelopedigital2.jpg)  
+\* O normal seria você criptografar com a chave publica do destino, pois você quer que só ela tenha como ler a mensagem
+
+É normal pessoa ficarem gerando chaves secretas a cada transmissão, pois ela pode ser obtida pela chaves privada/pública ao receber a informação.  
+Além disso, descobrir a chave secreta não seria nada demais pois transmissão seguinte iria ser outra.  
 
 # Resumo de Mensagem
 Em inglês: Message Digest
 
+Atráves de um algoritmo de hash você obtem uma saída que representa o conjunto a informação jogada no algoritmo  
+A probabilidade de dar colisão é bem baixa, então consideramos que apenas para aquela dada entrada obtemos aquela saída.  
+
 ![Calculating Digest](digest.jpg)  
+
+# Salt
+Antigamente bancos de dados armazenavam o usuário e a senha dele. Quando o usuário falava a senha, o sistema conferia com a senha do banco de dados.  
+Lado negativo: Se alguém conseguisse acesso ao banco de dados, conseguiria todas as senhas.  
+
+| Usuário | Senha |
+| ------- | ----- |
+| Thiago  | 12345 |
+| Miguel  | 67890 |
+| João    | 12345 |
+
+Depois os bancos de dados armazenavam o usuário e digests da senha. Quando o usuário falava a senha, o sistema calculava o digest da senha falada e comparava com o digest armazenado.  
+Lado negativo: Se alguém descobrisse a senha que leva a um digest X, essa pessoa saberia que todos com o mesmo digest usam a mesma senha.  
+
+Hash(12345) = A1B0DE  
+Hash(67890) = JKH653  
+
+| Usuário | Digest |
+| ------- | ------ |
+| Thiago  | A1B0DE |
+| Miguel  | JKH653 |
+| João    | A1B0DE |
+
+Salt é um valor aleatório a ser adicionada a senha antes de calcular o digest.  
+Esse valor é escolhido durante a criação da conta e deverá ser utilizado sempre para conferir se a senha está correta.  
+
+Hash(12345 + 100) = 83JDIR  
+Hash(67890 + 47) = JKH653  
+Hash(12345 + 93) = PQMS74  
+
+| Usuário | Digest | Salt |
+| ------- | ------ | ---- |
+| Thiago  | 83JDIR | 100  |
+| Miguel  | JKH653 | 47   |
+| João    | PQMS74 | 93   |
+
+# Assinatura Digital
+Em inglês: Digital Signature
+
+![Creating digital signature](digitalsignature.jpg)  

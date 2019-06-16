@@ -247,36 +247,187 @@ Você utiliza uma função hash no texto plano para calcular o digest, agora se 
 Você cifra o digest com a chave privada da origem para que o destino decifre com a chave pública e tenha certeza que a mensagem veio da origem e que não foi adulterada  
 
 **45. Para que serve o certificado digital?**  
+Para provar que uma dada chave pública pertence a uma entidade  
+
+Etapas para validar certificado:  
+Integridade e autenticidade  
+Verificação de prazo de validade  
+LCR (buscar ver se a chave ainda está válida)  
 
 **46. Para que serve a autoridade certificadora?**  
+Autoridade certificadora é quem irá confirmar que dado certificado está válido, é verdadeiro e o dono é quem o certificado diz  
 
 **47. Como funciona o processo de comunicação segura?**  
 
+Controle de Temporalidade  
+Garantia de Integridade  
+Garantia de Autenticidade  
+Garantia de Confidencialidade  
+
+Esses ultimos 3 podem ser alcançados utilizando os conhecimentos anteriores de assinatura digital e envelope digital  
+
+Controle de Temporalidade envolve dar uma validade para as mensagens  
+
 **48. Como funciona o SSL?**  
+Protocolo handshake:  
+Trocam mensagens importantes para estabelecer o inicio de uma comunicação  
+
+Cliente envia mensagem com versão, ID de sessão, cifras aceitáveis e métodos aceitáveis de compactação  
+Servidor responde mensagem com versão, ID de sessão, cifras aceitáveis e métodos aceitáveis de compactação  
+Servidor envia certificado para o cliente  
+Servidor manda mensagem de conclusão  
+Cliente gera chave secreta, criptografa com chave pública e envia para servidor  
+Servidor recupera a chave  
+Agora é utilizado essa chave secreta para se comunicar  
+
+É opcional o cliente ter certificado mas isso aumenta o risco de um man-in-the-middle  
 
 **49. Para que serve o SET? Quais os seus objetivos?**  
+Para garantir a segurança de transações eletronicas  
+Uma ação feita não pode ser desfeita  
 
 **50. Quais os participantes de uma operação de pagamento e suas funções no SET?**  
 
+Cliente (Cardholder)  
+Lojas (Merchant)  
+Emissor (Issue)  
+Intermediário (Acquire)  
+Entreposto de Pagamento (Acquire)  
+Autoridade Certificadora  
+
 **51. Para que serve a técnica da assinatura dual?**  
+Impedir que visualizem as informações pessoais de pagamento do cliente ao mesmo tempo que garanta a autenticidade  
 
 **52. Qual a diferença entre verificação e identificação em um processo de autenticação?**  
 
+**Verificação**: Verifica se aquele usuário é quem diz que é  
+Por exemplo, quando você loga em um sistema e passa email e senha  
+Você está dizendo que seu email é X e sua senha é Y, agora o sistema só tem que verificar se é verdade  
+A conexão é 1:1 pois você está comparando o dado que recebeu com uma pessoa apenas  
+
+**Identificação**: Procura descobrir quem é aquele usuário  
+Por exemplo, quando você acessa algo usando sua biometria  
+O sistema recebe a sua biometria e busca descobrir a quem está associada essa biometria  
+A conexão é 1:N pois você está comparando o dado que recebeu com todos no banco de dados até achar  
+
 **53. Qual a diferença entre autenticação monofator e autenticação multifator?**  
+
+**Autenticação Monofator**: Quando você faz apenas um desafio para o usuário  
+Para logar no site basta acertar a senha  
+
+**Autenticação Multifator**: Quando é feito mais que um desafio  
+Para logar no site você precisa acertar a senha  
+Depois passar o código enviado para seu celular  
 
 **54. Quais os requisitos para uma forte autenticação?**  
 
+**Verificar algo que o usuário conhece**  
+Ex: senha pessoal  
+
+**Verificar algo que o usuário possui**  
+Ex: chave privada armazenada em um smart card ou token  
+
+**Veriricar algo que o usuário é**  
+Ex: biometria  
+
 **55. Quais os tipos de smart cards?**  
 
+**Cartão apenas com chip de memória**  
+Funciona como um sistema de arquivos, você pode ler/escrever informação/pasta/arquivo nele  
+Memória tem limite, quando alcança o limite você só vai poder ler  
+READ-ONLY MEMORY  
+Memória não-volatil, memória persiste mesmo sem energia  
+
+**Cartão com lógica integrada**  
+Possuem operações de criptografia  
+Informações já podem ficar criptografadas  
+
+**Cartão com micro-controladores seguros integrados**  
+Possuem micro-controlador e sistema operacional  
+Podem ter geradores de chaves pares  
+
 **56. O que são tokens?**  
+Dispositivos que podem ser usados durante o processo de autenticação multifator  
 
 **57. O que é um sistema de autenticação biométrico invasivo?**  
+Quando é algo que deixa o usuário incomodado de prover ao sistema  
+
+Ex: Uma digital normal envolve encostar o dedo no scanner  
+Ela seria invásiva se obrigasse o usuário a enfiar o dedo em um buraco e se não fosse ele cortar o dedo  
 
 **58. Como funciona o processo de decisão em um sistema de autenticação biométrico?**  
+É feita uma comparação da biometria do usuário com a armazenada no banco  
+Tendo uma margem de aceitação e rejeição, pois não é garantido estar 100% igual  
 
 **59. O que é malware?**  
+Código malicioso que utiliza recurso do seu equipamento sem a prévia autorização do usuário  
 
 **60. Quais os tipos de malware e suas características?**  
+
+**Vírus**  
+Tem poder de proliferação  
+Depende que o usuário execute ele  
+Pode vir anexado em programas executáveis  
+Pode vir anexado em arquivos com macro (word, excel, etc)  
+Pode vir anexado no setor de boot do disco  
+
+**Worm**  
+Tem poder de proliferação  
+Não depende que o usuário execute ele  
+Utiliza rede para disseminação  
+Consome recursos do sistema para se manter ativo  
+
+**Mailers e Mass-Mailer Worms**  
+Propaga por e-mail  
+
+**Octopus**  
+Outra classe de worm  
+Máquinas infectadas se comunicam para fazer algo malicioso  
+
+**Rabbits**  
+Outra classe de worm  
+Pula de máquina em máquina  
+
+**Logic Bombs**  
+Programado para executar em algum momento  
+
+**Trojan Horses**  
+Camufla em um software do usuário  
+Se instala quando o usuário executa o software  
+
+**Backdoors**  
+Utiliza conexão remota ao sistema para controlar remotamente  
+
+**Password-Stealing Trojans**  
+Outra classe de Trojan Horse  
+Visa capturar senha  
+Geralmente utiliza keyloggers  
+
+**Germes**  
+Primeira geração de um vírus, quando o vírus é executado pela primeira vez  
+Código é diferente das execuções seguintes do vírus  
+
+**Exploits**  
+Explora uma ou mais vulnerabilidades específicas  
+Objetivo é obter acesso mais privilegiado ao sistema  
+
+**Downloaders**  
+Quando executado baixa conteúdo malicioso de um site e executa ele  
+
+**Dialers**  
+
+**Droppers**  
+Instala a primeira geração de um vírus (o germe)  
+
+**Injectors**  
+
+**Spammer Programs**  
+
+**Flooders**  
+
+**Hoaxes e Mensagens de Correntes**  
+
+**Adware e Spyware**  
 
 **61. Como é constituído um vírus?**  
 

@@ -415,37 +415,160 @@ Objetivo é obter acesso mais privilegiado ao sistema
 Quando executado baixa conteúdo malicioso de um site e executa ele  
 
 **Dialers**  
+--  
 
 **Droppers**  
 Instala a primeira geração de um vírus (o germe)  
 
 **Injectors**  
+Outra classe de Droppers  
+Injeta vírus no tratador de interrupção de disco  
+Iniciam um ataque com Worms  
+Injeta em vários sistemas remotos  
 
 **Spammer Programs**  
+Utiliza sua máquina para fazer Spamm  
 
 **Flooders**  
+A intenção é fazer milhares de máquinas atacarem o mesmo alvo  
+Sobre carregar o alvo  
+Provoca ataque Denial Of Service  
 
 **Hoaxes e Mensagens de Correntes**  
+Não é necessariamente malicioso  
+Tendem a fazer o usuário a acreditar em informações  
+Faz o usuário divulgar  
+Trafego indesejável de mensagems  
+
+Ex: corrente de whatsapp/facebook  
 
 **Adware e Spyware**  
+Intenção de fazer propaganda  
+Coletar informação do perfil do usuário  
+
+Ex: Pop-ups  
 
 **61. Como é constituído um vírus?**  
 
+**Propagação**, método usado para espalhar  
+**Payload**, ação produzida localmente na vítima  
+
 **62. Quais os tipos de propagação de um vírus?**  
+
+**Parasita**  
+Propaga para outros arquivos  
+Acopla ao arquivo original  
+Encontra-se em executável ou macros  
+
+**Setor de Boot**  
+Muda sua área de boot  
+
+**Multi-Partite**  
+Both  
 
 **63. Quais os tipos de payload de vírus?**  
 
+**Trigger**, circustância que faz com que o vírus execute seu payload   
+
+**Polimorfismo**, criar um código mutante para que fique difícil de ser reconhecido pelo antivírus  
+Ex: cifrar o código  
+Ex2: Adicionar código inútil  
+
 **64. Como funciona a técnica do polimorfismo de vírus?**  
+
+aula 15  
+\> 1:00:00  
 
 **65. Como funciona o ataque de buffer overflow?**  
 
+Seu programa volta e meia armazena na memória informações importantes para controlar o fluxo do código  
+
+Buffer overflow envolve se aproveitar de programas mal escritos para sobreescrever essas informações importantes  
+
+Lembre que a uma função precisa saber o endereço que vai retorna quando finalizada  
+
+| Pilha |
+|:-----:|
+| 0x0000..00 |
+| . |
+| . |
+| . |
+| Variáveis locais da função |
+| Base Pointer |
+| Endereço de retorno |
+| Parâmetros da função |
+| . |
+| . |
+| . |
+| 0xFFFF..FF |
+
+Note que você escreve em direção a 0xFFFF..FF  
+Note que você lê em direção a 0x0000..00  
+Push manda para o topo da pilha (endereço mais alto disponível) e Pop retira do topo da pilha  
+
+Então se você passar um parâmetro maior do que o espaço reservado, você vai escrever em cima do endereço de retorno  
+
 **66. Qual a estratégia da defesa em profundidade? Que fatores definem este esquema?**  
+
+Criar-se camadas para lidar com problemas separadamente e proteger-se mesmo que uma das camadas caia  
+**Perímetro**  
+**Rede Interna**  
+**Humano**  
 
 **67. Quais os componentes de um perímetro e suas funções?**  
 
+**Roteador de borda com filtro de pacote**, filtra tráfego baseado em listas com regras do que deve permitir e negar  
+Essa filtragem é básica, pois se fosse mais complicada iria parar muito a rede por qualquer pacote  
+
+Exemplo de regras:  
+Não permitir que saia pacote com endereço que não existe na rede  
+Não permetir pacote que tenha como origem alguém da rede interna  
+
+Note como essas regras não precisam de todo o pacote para funcionarem, então não precisam travar o tráfego esperando receber todos os pacotes  
+
+**Firewall com estado**, mantém uma tabela de estado para conseguir fazer uma filtragem melhor  
+Agora você sabe de quem você está esperando uma mensagem de reconhecimento (ACK) e de quem não está esperando, com isso conseguindo filtrar os que não te interessam  
+
+Tráfego é menor do que na parte anterior, ou seja, menor chance de congestionar  
+
+**Firewall proxy (procurado)**, dado que os pacotes estão corretos, protocolos foram seguidos de maneira correta...  
+Tem vírus? É algo perigoso para a rede? A rede está mandando algo perigoso?  
+
+Proxy impede uma comunicação direta da estação de trabalho com a rede externa  
+"Conteudo X é proibido na empresa"  
+
+Ex: Facebook é proibido na empresa  
+Conteudo Applet é proibido  
+
+A rede externa interage com o proxy agora, não diretamente com as máquinas da rede interna  
+
+**Redes com triagem**, servidor de serviços entre as estações e o mundo externo  
+
+**Sistema de detecção de intrusão (IDS - Intruder Detection System)**, quer identificar todo tráfego malicioso e avisar quando ver algo suspeito  
+
+Anomalia, monitora variações na rede fora do normal  
+Assinatura, monitora a rede em busca de padrões de tráfego conhecidos de ataques  
+
+Você bota IDS entre:  
+Roteador de Borda - Firewall com Estado  
+Firewall com Estado - Rede com Triagem  
+Rede com Triagem - Rede Interna  
+
+**DMZ**  
+
+**VPN**  
+
 **68. Que ações podem garantir a real segurança de uma rede interna?**  
 
+Firewall pessoal  
+Alertar aplicação tentando usar rede  
+Instalar antivírus  
+Controlar instalação de software não autorizado  
+Auditoria para saber o que pode e o que não pode fazer  
+
 **69. Qual a importância do fator humano no esquema de defesa?**  
+
+Colaboração de todos envolvidos na rede é essencial  
 
 **70. O que é um cryptography package provider?**  
 

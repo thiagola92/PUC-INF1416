@@ -55,7 +55,7 @@ permit rede_screened any
 ### I2
 permit tcp any gt 1023 s1 eq 80 `WEB`  
 permit tcp any gt 1023 s2 eq 25 [Message Transfer Agent] `SMTP`  
-permit tcp any gt 1023 s2 eq 587 [Message Submission Agent] `SMTP`  
+permit tcp any gt 1023 s2 eq 587 [Message User Agent] `SMTP`  
 permit tcp rede_interna gt 1023 proxy eq 8080 `WEB`  
 
 Note que até agora o s1 consegue receber da rede interna na porta 80  
@@ -68,5 +68,5 @@ permit tcp proxy gt 1023 any eq 80 `WEB`
 -
 
 ### E3
-permit tcp rede_interna gt 1023 s2 eq 587 [Message Submission Agent] `SMTP`  
+permit tcp rede_interna gt 1023 s2 eq 587 [Message User Agent] `SMTP`  
 permit tcp rede_interna gt 1023 proxy eq 8080 `WEB`  
